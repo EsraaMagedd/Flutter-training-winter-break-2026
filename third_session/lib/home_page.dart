@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:third_session/recommendation_list.dart';
 import 'SliderCard.dart';
+import 'custom_carousel_slider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,65 +26,29 @@ final CarouselSliderController _controller = CarouselSliderController();
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 60),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                HomeIconButton(icon: Icons.menu),
-                Spacer(),
-                HomeIconButton(icon: Icons.search),
-                SizedBox(width: 5),
-                HomeIconButton(icon: Icons.notifications),
-              ],
-            ),
-            SizedBox(height: 20),
-            HomeTitleWidget(title: 'Breaking News'),
-            SizedBox(height: 20),
-            CarouselSlider(
-              carouselController: _controller,
-              items: _slides,
-              options: CarouselOptions(
-                aspectRatio: 16 / 9,
-                viewportFraction: 0.8,
-                enlargeCenterPage: true,
-                enableInfiniteScroll: false,
-                initialPage: 1,
-                autoPlay: true,
-                autoPlayCurve: Curves.fastOutSlowIn,
-                autoPlayAnimationDuration: Duration(milliseconds: 100),
-                onPageChanged: (index,reason){
-                  _currentSlideIndex = index;
-                  setState(() {
-
-                  });
-                }
+        padding: const EdgeInsets.only(left: 10,right: 10, top: 60),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  HomeIconButton(icon: Icons.menu),
+                  Spacer(),
+                  HomeIconButton(icon: Icons.search),
+                  SizedBox(width: 5),
+                  HomeIconButton(icon: Icons.notifications),
+                ],
               ),
-            ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(_slides.length, (index){
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
-                  child: AnimatedContainer(
-                    duration: Duration(milliseconds: 300),
-                    curve: Curves.fastOutSlowIn,
-                    width: index==_currentSlideIndex? 14: 10,
-                    height: 10,
-                    decoration: BoxDecoration(
-                      color:index==_currentSlideIndex? Colors.redAccent: Colors
-                          .grey.shade300,
-                      borderRadius: BorderRadius.circular(16)
-                    ),
-                  ),
-                );
-              }),
-            ),
-            SizedBox(height: 20,),
-            HomeTitleWidget(title: 'Recommendation'),
-            SizedBox(height: 20,),
-          ],
+              SizedBox(height: 20),
+              HomeTitleWidget(title: 'Breaking News'),
+              SizedBox(height: 20),
+              const CustomCarouselSlider(),
+              SizedBox(height: 20,),
+              HomeTitleWidget(title: 'Recommendation'),
+              SizedBox(height: 20,),
+              RecommendationItem()
+            ],
+          ),
         ),
       ),
     );

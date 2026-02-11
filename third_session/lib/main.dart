@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:third_session/SliderCard.dart';
 import 'package:third_session/home_page.dart';
 import 'package:third_session/login_screen.dart';
+import 'package:third_session/nav_bar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       // home: CounterApp(),
-      home: HomePage(),
+      home: NavBar(),
+      // home: HomePage(),
       // home: Slidercard(),
       debugShowCheckedModeBanner: false,
     );
